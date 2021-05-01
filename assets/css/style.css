@@ -1,0 +1,15 @@
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #dadada;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 35rem;
+  height: 35rem;
+  border: solid black;
+  background-color: grey;
+}
