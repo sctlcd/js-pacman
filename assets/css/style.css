@@ -1,7 +1,7 @@
 html {
   margin: 0;
   padding: 0;
-  background-color: #dadada;
+  background-color: black;
   font-family: 'Press Start 2P', cursive;
   height: 100vh;
 }
@@ -22,7 +22,7 @@ html {
   width: 35rem;
   height: 35rem;
   border: solid black;
-  background-color: #fafafa;
+  background-color: black;
 }
 
 .grid div {
@@ -30,9 +30,13 @@ html {
   height: 1.25rem;
 }
 
+h3 {
+  color: #fafafa;
+}
+
 .pac-dot {
-  background-color: grey;
-  border: 5px solid #fafafa;
+  background-color: darkgrey;
+  border: 5px solid black;
   box-sizing: border-box;
 }
 
@@ -48,4 +52,9 @@ html {
 .pac-man {
   background-color: gold;
   border-radius: 10px;
+}
+
+.ghost-lair {
+  background-color: black;
+  /* border: 5px solid #fafafa; */
 }
