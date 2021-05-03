@@ -80,6 +80,12 @@ function movePacman(e) {
         && !squares[pacmanCurrentIndex - 1].classList.contains('wall')
         && !squares[pacmanCurrentIndex - 1].classList.contains('ghost-lair'))
         pacmanCurrentIndex -= 1;
+
+        //check if pacman is in the left exist
+        if ((pacmanCurrentIndex - 1) === 363) {
+          pacmanCurrentIndex = 391
+        }
+        
       break;
     case 38:
       if (pacmanCurrentIndex - width >= 0

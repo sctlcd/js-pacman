@@ -1,1 +1,1 @@
-# JS - PAC MAN
+# [JS - Pac Man](https://sctlcd.github.io/js-pacman/)
