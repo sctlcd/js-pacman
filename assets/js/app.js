@@ -4,7 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreDisplay = document.getElementById('score');
   const width = 28; // 28 x 28 = 784 squares
 
-  // layout of grid and what is in the squares
+  /*
+  layout of grid and what is in the squares
+  0 - pac-dots
+  1 - wall
+  2 - ghost-lair
+  3 - power-pellet
+  4 - empty
+  */
   const layout = [
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
     1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
@@ -35,11 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
   ];
-  // 0 - pac-dots
-  // 1 - wall
-  // 2 - ghost-lair
-  // 3 - power-pellet
-  // 4 - empty
 
   const squares = [];
 
@@ -74,6 +76,13 @@ function movePacman(e) {
 
   squares[pacmanCurrentIndex].classList.remove('pac-man');
 
+  /*
+   key | code
+   left arrow | 37
+   up arrow | 38
+   right arrow | 39
+   down arrow | 40
+   */
   switch(e.keyCode) {
     case 37:
       if (pacmanCurrentIndex % width !== 0
@@ -81,11 +90,11 @@ function movePacman(e) {
         && !squares[pacmanCurrentIndex - 1].classList.contains('ghost-lair'))
         pacmanCurrentIndex -= 1;
 
-        //check if pacman is in the left exist
+        // check if pacman is in the left exist
         if ((pacmanCurrentIndex - 1) === 363) {
-          pacmanCurrentIndex = 391
+          pacmanCurrentIndex = 391;
         }
-        
+
       break;
     case 38:
       if (pacmanCurrentIndex - width >= 0
@@ -98,6 +107,12 @@ function movePacman(e) {
         && !squares[pacmanCurrentIndex + 1].classList.contains('wall')
         && !squares[pacmanCurrentIndex + 1].classList.contains('ghost-lair'))
         pacmanCurrentIndex += 1;
+
+        // check if pacman is in the right exit
+        if ((pacmanCurrentIndex + 1) === 392) {
+          pacmanCurrentIndex = 364;
+        }
+
       break;
     case 40:
       if (pacmanCurrentIndex + width < width * width
@@ -105,11 +120,6 @@ function movePacman(e) {
         && !squares[pacmanCurrentIndex + width].classList.contains('ghost-lair'))
         pacmanCurrentIndex += width;
       break;
-    // key | code
-    // left arrow | 37
-    // up arrow | 38
-    // right arrow | 39
-    // down arrow | 40
   }
 
   squares[pacmanCurrentIndex].classList.add('pac-man');
