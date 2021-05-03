@@ -3,6 +3,17 @@ html {
   padding: 0;
   background-color: #dadada;
   font-family: 'Press Start 2P', cursive;
+  height: 100vh;
+}
+
+.wrapper {
+  height: 100vh;
+  /* This part is important for centering the content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* End center */
+  flex-direction: column;
 }
 
 .grid {
@@ -31,5 +42,10 @@ html {
 
 .power-pellet {
   background-color: darkgreen;
+  border-radius: 10px;
+}
+
+.pac-man {
+  background-color: gold;
   border-radius: 10px;
 }
