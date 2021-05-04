@@ -49,11 +49,32 @@ h3 {
   border-radius: 10px;
 }
 
+.blinky {
+  background-color: #bc0000;
+  border: 0;
+}
+
+.pinky {
+  background-color: #e598a5;
+  border: 0;
+}
+
+.inky {
+  background-color: #00dddd;
+  border: 0;
+}
+
+.clyde {
+  background-color: #e79600;
+  border: 0;
+}
+
+.scared-ghost {
+  background-color: #00e598;
+  border: 0;
+}
+
 .pac-man {
   background-color: gold;
   border-radius: 10px;
-}
-
-.ghost-lair {
-  background-color: black;
 }
