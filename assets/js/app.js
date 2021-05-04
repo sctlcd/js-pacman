@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid');
   const scoreDisplay = document.getElementById('score');
   const width = 28; // 28 x 28 = 784 squares
+  let score = 0;
 
   /*
   layout of grid and what is in the squares
@@ -94,7 +95,6 @@ function movePacman(e) {
         if ((pacmanCurrentIndex - 1) === 363) {
           pacmanCurrentIndex = 391;
         }
-
       break;
     case 38:
       if (pacmanCurrentIndex - width >= 0
@@ -112,7 +112,6 @@ function movePacman(e) {
         if ((pacmanCurrentIndex + 1) === 392) {
           pacmanCurrentIndex = 364;
         }
-
       break;
     case 40:
       if (pacmanCurrentIndex + width < width * width
@@ -123,8 +122,38 @@ function movePacman(e) {
   }
 
   squares[pacmanCurrentIndex].classList.add('pac-man');
+
+  pacDotEaten();
 }
 
 // event listener on keyup event
 document.addEventListener('keyup', movePacman);
+
+// What happens when Pac-man eats a pac-dot
+function pacDotEaten() {
+  if(squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+    score++;
+    scoreDisplay.innerHTML = score;
+    squares[pacmanCurrentIndex].classList.remove('pac-dot');
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
