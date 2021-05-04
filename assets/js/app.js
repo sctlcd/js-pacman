@@ -66,77 +66,99 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  function rotateDiv(pos, deg) {
+    squares[pos].style.transform = `rotate(${deg}deg)`;
+  };
+
 createBoard();
 
-//starting position of pac-man
-let pacmanCurrentIndex = 490;
-squares[pacmanCurrentIndex].classList.add('pac-man');
+// Create Pacman template
+class Pacman {
+  constructor(className, startIndex, speed) {
+    this.className = className;
+    this.startIndex = startIndex;
+    this.speed = speed;
+    this.currentIndex = startIndex;
+  };
+};
+
+pacman = new Pacman( 'pac-man', 490, 300);
+
+// Draw pacman onto the grid
+squares[pacman.currentIndex].classList.add(pacman.className);
 
 // move pac-man
 function movePacman(e) {
-
-  squares[pacmanCurrentIndex].classList.remove('pac-man');
+  squares[pacman.currentIndex].classList.remove('pac-man');
 
   /*
-   key | code
-   left arrow | 37
-   up arrow | 38
-   right arrow | 39
-   down arrow | 40
+   key | code | movement | rotation(degree)
+   left arrow | 37 | -1 | 180
+   up arrow | 38 | -width | 270
+   right arrow | 39 | +1 | 0
+   down arrow | 40 | +width | 90
    */
   switch(e.keyCode) {
     case 37:
-      if (pacmanCurrentIndex % width !== 0
-        && !squares[pacmanCurrentIndex - 1].classList.contains('wall')
-        && !squares[pacmanCurrentIndex - 1].classList.contains('ghost-lair'))
-        pacmanCurrentIndex -= 1;
+      if (pacman.currentIndex % width !== 0
+        && !squares[pacman.currentIndex -1].classList.contains('wall')
+        && !squares[pacman.currentIndex -1].classList.contains('ghost-lair')) {
+          pacman.currentIndex -= 1;
+          rotateDiv(pacman.currentIndex, 180);
+        }
 
         // check if pacman is in the left exist
-        if ((pacmanCurrentIndex - 1) === 363) {
-          pacmanCurrentIndex = 391;
+        if ((pacman.currentIndex -1) === 363) {
+          pacman.currentIndex = 391;
         }
       break;
     case 38:
-      if (pacmanCurrentIndex - width >= 0
-        && !squares[pacmanCurrentIndex - width].classList.contains('wall')
-        && !squares[pacmanCurrentIndex - width].classList.contains('ghost-lair'))
-        pacmanCurrentIndex -= width;
+      if (pacman.currentIndex -width >= 0
+        && !squares[pacman.currentIndex -width].classList.contains('wall')
+        && !squares[pacman.currentIndex -width].classList.contains('ghost-lair')) {
+          pacman.currentIndex -= width;
+          rotateDiv(pacman.currentIndex, 270);
+        }
       break;
     case 39:
-      if (pacmanCurrentIndex % width < width - 1
-        && !squares[pacmanCurrentIndex + 1].classList.contains('wall')
-        && !squares[pacmanCurrentIndex + 1].classList.contains('ghost-lair'))
-        pacmanCurrentIndex += 1;
+      if (pacman.currentIndex % width < width - 1
+        && !squares[pacman.currentIndex +1].classList.contains('wall')
+        && !squares[pacman.currentIndex +1].classList.contains('ghost-lair')) {
+          pacman.currentIndex += 1;
+          rotateDiv(pacman.currentIndex, 0);
+        }
 
         // check if pacman is in the right exit
-        if ((pacmanCurrentIndex + 1) === 392) {
-          pacmanCurrentIndex = 364;
+        if ((pacman.currentIndex + 1) === 392) {
+          pacman.currentIndex = 364;
         }
       break;
     case 40:
-      if (pacmanCurrentIndex + width < width * width
-        && !squares[pacmanCurrentIndex + width].classList.contains('wall')
-        && !squares[pacmanCurrentIndex + width].classList.contains('ghost-lair'))
-        pacmanCurrentIndex += width;
+      if (pacman.currentIndex +width < width * width
+        && !squares[pacman.currentIndex +width].classList.contains('wall')
+        && !squares[pacman.currentIndex +width].classList.contains('ghost-lair')) {
+          pacman.currentIndex += width;
+          rotateDiv(pacman.currentIndex, 90);
+        }
       break;
   }
 
-  squares[pacmanCurrentIndex].classList.add('pac-man');
+  squares[pacman.currentIndex].classList.add('pac-man');
 
   pacDotEaten();
-}
+};
 
 // event listener on keyup event
 document.addEventListener('keyup', movePacman);
 
 // What happens when Pac-man eats a pac-dot
 function pacDotEaten() {
-  if(squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+  if(squares[pacman.currentIndex].classList.contains('pac-dot')) {
     score++;
     scoreDisplay.innerHTML = score;
-    squares[pacmanCurrentIndex].classList.remove('pac-dot');
+    squares[pacman.currentIndex].classList.remove('pac-dot');
   }
-}
+};
 
 // Create Ghost template
 class Ghost {
@@ -146,8 +168,8 @@ class Ghost {
     this.speed = speed;
     this.currentIndex = startIndex;
     this.timerId = NaN;
-  }
-}
+  };
+};
 
 ghosts = [
   new Ghost('blinky', 348, 250),
@@ -161,6 +183,9 @@ ghosts.forEach(ghost => {
   squares[ghost.currentIndex].classList.add(ghost.className);
   squares[ghost.currentIndex].classList.add('ghost');
 });
+
+
+
 
 
 
