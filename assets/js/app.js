@@ -1,74 +1,72 @@
-document.addEventListener('DOMContentLoaded', () => {
+const grid = document.querySelector('.grid');
+const scoreDisplay = document.getElementById('score');
+const width = 28; // 28 x 28 = 784 squares
+let score = 0;
 
-  const grid = document.querySelector('.grid');
-  const scoreDisplay = document.getElementById('score');
-  const width = 28; // 28 x 28 = 784 squares
-  let score = 0;
+/*
+layout of grid and what is in the squares
+0 - pac-dots
+1 - wall
+2 - ghost-lair
+3 - power-pellet
+4 - empty
+*/
+const layout = [
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+  1,3,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,3,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,4,4,4,4,4,4,4,4,4,4,1,1,0,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,4,1,1,1,2,2,1,1,1,4,1,1,0,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
+  4,4,4,4,4,4,0,0,0,4,1,2,2,2,2,2,2,1,4,0,0,0,4,4,4,4,4,4,
+  1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,
+  1,1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,
+  1,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+  1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
+  1,3,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,3,1,
+  1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,
+  1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,
+  1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,
+  1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
+  1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
+  1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+];
 
-  /*
-  layout of grid and what is in the squares
-  0 - pac-dots
-  1 - wall
-  2 - ghost-lair
-  3 - power-pellet
-  4 - empty
-  */
-  const layout = [
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
-    1,3,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,3,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,4,4,4,4,4,4,4,4,4,4,1,1,0,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,4,1,1,1,2,2,1,1,1,4,1,1,0,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
-    4,4,4,4,4,4,0,0,0,4,1,2,2,2,2,2,2,1,4,0,0,0,4,4,4,4,4,4,
-    1,1,1,1,1,1,0,1,1,4,1,2,2,2,2,2,2,1,4,1,1,0,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,
-    1,1,1,1,1,1,0,1,1,4,1,1,1,1,1,1,1,1,4,1,1,0,1,1,1,1,1,1,
-    1,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
-    1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1,
-    1,3,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,3,1,
-    1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,
-    1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,
-    1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1,
-    1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
-    1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
-    1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-  ];
+const squares = [];
 
-  const squares = [];
+// draw the grid and render it
+function createBoard() {
+  for (let i = 0; i < layout.length; i++) {
+    const square = document.createElement('div');
+    grid.appendChild(square);
+    squares.push(square);
 
-  // draw the grid and render it
-  function createBoard() {
-    for (let i=0; i < layout.length; i++) {
-      const square = document.createElement('div');
-      grid.appendChild(square);
-      squares.push(square);
-
-      // add layout to the board
-      if (layout[i] === 0) {
-        squares[i].classList.add('pac-dot');
-      } else if (layout[i] === 1) {
-        squares[i].classList.add('wall');
-      } else if (layout[i] === 2) {
-        squares[i].classList.add('ghost-lair');
-      } else if (layout[i] === 3) {
-        squares[i].classList.add('power-pellet');
-      }
+    // add layout to the board
+    if (layout[i] === 0) {
+      squares[i].classList.add('pac-dot');
+    } else if (layout[i] === 1) {
+      squares[i].classList.add('wall');
+    } else if (layout[i] === 2) {
+      squares[i].classList.add('ghost-lair');
+    } else if (layout[i] === 3) {
+      squares[i].classList.add('power-pellet');
     }
-  };
+  }
+};
 
-  function rotateDiv(pos, deg) {
-    squares[pos].style.transform = `rotate(${deg}deg)`;
-  };
+function rotateDiv(pos, deg) {
+  squares[pos].style.transform = `rotate(${deg}deg)`;
+};
 
 createBoard();
 
@@ -82,7 +80,7 @@ class Pacman {
   };
 };
 
-pacman = new Pacman( 'pac-man', 490, 300);
+pacman = new Pacman('pac-man', 490, 300);
 
 // Draw pacman onto the grid
 squares[pacman.currentIndex].classList.add(pacman.className);
@@ -98,48 +96,48 @@ function movePacman(e) {
    right arrow | 39 | +1 | 0
    down arrow | 40 | +width | 90
    */
-  switch(e.keyCode) {
+  switch (e.keyCode) {
     case 37:
-      if (pacman.currentIndex % width !== 0
-        && !squares[pacman.currentIndex -1].classList.contains('wall')
-        && !squares[pacman.currentIndex -1].classList.contains('ghost-lair')) {
-          pacman.currentIndex -= 1;
-          rotateDiv(pacman.currentIndex, 180);
-        }
+      if (pacman.currentIndex % width !== 0 &&
+        !squares[pacman.currentIndex - 1].classList.contains('wall') &&
+        !squares[pacman.currentIndex - 1].classList.contains('ghost-lair')) {
+        pacman.currentIndex -= 1;
+        rotateDiv(pacman.currentIndex, 180);
+      }
 
-        // check if pacman is in the left exist
-        if ((pacman.currentIndex -1) === 363) {
-          pacman.currentIndex = 391;
-        }
+      // check if pacman is in the left exist
+      if ((pacman.currentIndex - 1) === 363) {
+        pacman.currentIndex = 391;
+      }
       break;
     case 38:
-      if (pacman.currentIndex -width >= 0
-        && !squares[pacman.currentIndex -width].classList.contains('wall')
-        && !squares[pacman.currentIndex -width].classList.contains('ghost-lair')) {
-          pacman.currentIndex -= width;
-          rotateDiv(pacman.currentIndex, 270);
-        }
+      if (pacman.currentIndex - width >= 0 &&
+        !squares[pacman.currentIndex - width].classList.contains('wall') &&
+        !squares[pacman.currentIndex - width].classList.contains('ghost-lair')) {
+        pacman.currentIndex -= width;
+        rotateDiv(pacman.currentIndex, 270);
+      }
       break;
     case 39:
-      if (pacman.currentIndex % width < width - 1
-        && !squares[pacman.currentIndex +1].classList.contains('wall')
-        && !squares[pacman.currentIndex +1].classList.contains('ghost-lair')) {
-          pacman.currentIndex += 1;
-          rotateDiv(pacman.currentIndex, 0);
-        }
+      if (pacman.currentIndex % width < width - 1 &&
+        !squares[pacman.currentIndex + 1].classList.contains('wall') &&
+        !squares[pacman.currentIndex + 1].classList.contains('ghost-lair')) {
+        pacman.currentIndex += 1;
+        rotateDiv(pacman.currentIndex, 0);
+      }
 
-        // check if pacman is in the right exit
-        if ((pacman.currentIndex + 1) === 392) {
-          pacman.currentIndex = 364;
-        }
+      // check if pacman is in the right exit
+      if ((pacman.currentIndex + 1) === 392) {
+        pacman.currentIndex = 364;
+      }
       break;
     case 40:
-      if (pacman.currentIndex +width < width * width
-        && !squares[pacman.currentIndex +width].classList.contains('wall')
-        && !squares[pacman.currentIndex +width].classList.contains('ghost-lair')) {
-          pacman.currentIndex += width;
-          rotateDiv(pacman.currentIndex, 90);
-        }
+      if (pacman.currentIndex + width < width * width &&
+        !squares[pacman.currentIndex + width].classList.contains('wall') &&
+        !squares[pacman.currentIndex + width].classList.contains('ghost-lair')) {
+        pacman.currentIndex += width;
+        rotateDiv(pacman.currentIndex, 90);
+      }
       break;
   }
 
@@ -153,7 +151,7 @@ document.addEventListener('keyup', movePacman);
 
 // What happens when Pac-man eats a pac-dot
 function pacDotEaten() {
-  if(squares[pacman.currentIndex].classList.contains('pac-dot')) {
+  if (squares[pacman.currentIndex].classList.contains('pac-dot')) {
     score++;
     scoreDisplay.innerHTML = score;
     squares[pacman.currentIndex].classList.remove('pac-dot');
@@ -182,28 +180,4 @@ ghosts = [
 ghosts.forEach(ghost => {
   squares[ghost.currentIndex].classList.add(ghost.className);
   squares[ghost.currentIndex].classList.add('ghost');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
