@@ -91,7 +91,11 @@ h3 {
     20px 20px,
     0 20px
   );
-  animation: chew 0.2s linear forwards infinite;
+  animation-name: chew;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
 }
 
 @keyframes chew {
