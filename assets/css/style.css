@@ -108,6 +108,41 @@ h3 {
   }
 }
 
+/* --------------------------------------- header */
+header {
+  color: #fafafa;
+  margin: 0 auto;
+  width: 100%;
+  text-align: right;
+}
+
+.pacman {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: gold;
+}
+
+.title-container {
+  display:inline-block;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+}
+
+.title {
+  width: 58%;
+  text-align: right;
+  float: left;
+}
+
+.pacman-container {
+    width: 38%;
+    text-align: center;
+    float: right;
+    padding-left: 2rem;
+    padding-top:0.8rem;
+}
+
 /* --------------------------------------- footer */
 footer {
   background-color: #00005f;
