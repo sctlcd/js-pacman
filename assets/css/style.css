@@ -122,21 +122,19 @@ header {
 
 .title-container {
   display:inline-block;
-  margin-bottom: 2rem;
   margin-top: 3rem;
 }
 
 .title {
-  width: 58%;
+  width: 54%;
   text-align: right;
   float: left;
 }
 
 .pacman-container {
-    width: 38%;
+    width: 42%;
     text-align: center;
     float: right;
-    padding-left: 2rem;
     padding-top:0.8rem;
 }
 
@@ -199,7 +197,7 @@ footer {
   bottom: 0;
   text-align: center;
   font-family: 'Roboto', sans-serif;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
 }
 
 footer{
