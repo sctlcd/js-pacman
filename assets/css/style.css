@@ -116,13 +116,6 @@ header {
   text-align: right;
 }
 
-.pacman {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: gold;
-}
-
 .title-container {
   display:inline-block;
   margin-bottom: 2rem;
@@ -141,6 +134,24 @@ header {
     float: right;
     padding-left: 2rem;
     padding-top:0.8rem;
+}
+
+.pacman {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: gold;
+  position:relative;
+}
+
+.pacman-eye {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 20px;
+  right: 40px;
+  background: #333333;
 }
 
 /* --------------------------------------- footer */
