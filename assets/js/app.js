@@ -245,6 +245,6 @@ function checkForGameOver() {
         !squares[pacman.currentIndex].classList.contains('scared-ghost')) {
         ghosts.forEach(ghost => clearInterval(ghost.timerId))
         document.removeEventListener('keyup', movePacman)
-        scoreDisplay.innerHTML = 'Game over!'
+        scoreDisplay.innerHTML = ' Game over!'
     }
 };

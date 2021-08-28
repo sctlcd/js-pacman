@@ -54,38 +54,52 @@ h3 {
 
 .power-pellet {
     background-color: darkgreen;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
     border-radius: 0.7rem;
 }
 
 .blinky {
     background-color: #bc0000;
-    border: 0;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
 }
 
 .pinky {
     background-color: #e598a5;
-    border: 0;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
 }
 
 .inky {
     background-color: #00dddd;
-    border: 0;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
 }
 
 .clyde {
     background-color: #e79600;
-    border: 0;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
 }
 
 .scared-ghost {
     background-color: #ebe4e4f1;
-    border: 0;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
 }
 
 .pac-man {
     background-color: gold;
+    border: 0.1rem solid black;
+    box-sizing: border-box;
     border-radius: 50%;
-    border: none;
+    /* border: none; */
     clip-path: polygon( 0 0, 20px 0, 20px -5px, 10px 12px, 25px 35px, 20px 60px, 0 40px);
     animation-name: chew;
     animation-duration: 0.4s;
