@@ -1,236 +1,233 @@
 html,
 body {
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  font-family: 'Press Start 2P', cursive;
-  height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    font-family: 'Press Start 2P', cursive;
+    height: 100vh;
 }
 
 .wrapper {
-  height: 100vh;
-  /* This part is important for centering the content */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* End center */
-  flex-direction: column;
+    height: 100vh;
+    /* This part is important for centering the content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* End center */
+    flex-direction: column;
 }
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  width: 40rem;
-  height: 40rem;
-  border: solid black;
-  background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    width: 40rem;
+    height: 40rem;
+    border: solid black;
+    background-color: black;
 }
 
 .grid div {
-  width: 1.42rem;
-  height: 1.42rem;
+    width: 1.42rem;
+    height: 1.42rem;
 }
 
 h3 {
-  color: #fafafa;
-  margin-top: 3rem;
+    color: #fafafa;
+    margin-top: 3rem;
 }
+
 
 /* --------------------------------------- grid elements */
 
 .pac-dot {
-  background-color: #fafafa;
-  border: 0.6rem solid black;
-  box-sizing: border-box;
-  border-radius: 0.7rem;
+    background-color: #fafafa;
+    border: 0.6rem solid black;
+    box-sizing: border-box;
+    border-radius: 0.7rem;
 }
 
 .wall {
-  background-color: black;
-  border: 0.06rem solid darkblue;
-  box-sizing: border-box;
+    background-color: black;
+    border: 0.06rem solid darkblue;
+    box-sizing: border-box;
 }
 
 .power-pellet {
-  background-color: darkgreen;
-  border-radius: 0.7rem;
+    background-color: darkgreen;
+    border-radius: 0.7rem;
 }
 
 .blinky {
-  background-color: #bc0000;
-  border: 0;
+    background-color: #bc0000;
+    border: 0;
 }
 
 .pinky {
-  background-color: #e598a5;
-  border: 0;
+    background-color: #e598a5;
+    border: 0;
 }
 
 .inky {
-  background-color: #00dddd;
-  border: 0;
+    background-color: #00dddd;
+    border: 0;
 }
 
 .clyde {
-  background-color: #e79600;
-  border: 0;
+    background-color: #e79600;
+    border: 0;
 }
 
 .scared-ghost {
-  background-color: #00e598;
-  border: 0;
+    background-color: #ebe4e4f1;
+    border: 0;
 }
 
 .pac-man {
-  background-color: gold;
-  border-radius: 50%;
-  border: none;
-  clip-path: polygon( 0 0, 20px 0, 20px -5px, 10px 12px, 25px 35px, 20px 60px, 0 40px );
-  animation-name: chew;
-  animation-duration: 0.4s;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
+    background-color: gold;
+    border-radius: 50%;
+    border: none;
+    clip-path: polygon( 0 0, 20px 0, 20px -5px, 10px 12px, 25px 35px, 20px 60px, 0 40px);
+    animation-name: chew;
+    animation-duration: 0.4s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
 }
 
 @keyframes chew {
-  50% {
-    clip-path: polygon(
-      0 0,
-      20px 0,
-      20px 10px,
-      8px 10px,
-      20px 10px,
-      20px 20px,
-      0 20px
-    );
-  }
+    50% {
+        clip-path: polygon( 0 0, 20px 0, 20px 10px, 8px 10px, 20px 10px, 20px 20px, 0 20px);
+    }
 }
 
+
 /* --------------------------------------- header */
+
 header {
-  color: #fafafa;
-  margin: 0 auto;
-  width: 100%;
-  text-align: right;
+    color: #fafafa;
+    margin: 0 auto;
+    width: 100%;
+    text-align: right;
 }
 
 .title-container {
-  display:inline-block;
-  margin-top: 3rem;
-  margin-bottom: 5rem;
+    display: inline-block;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
 }
 
 .title {
-  width: 54%;
-  text-align: right;
-  float: left;
+    width: 54%;
+    text-align: right;
+    float: left;
 }
 
 .pacman-container {
     width: 42%;
     text-align: center;
     float: right;
-    padding-top:0.8rem;
+    padding-top: 0.8rem;
 }
 
 .pacman-title {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: gold;
-  position:relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: gold;
+    position: relative;
 }
 
 .pacman-eye {
-  position: absolute;
-  width: 0.2rem;
-  height: 0.2rem;
-  border-radius: 50%;
-  top: 0.6rem;
-  right: 1.2rem;
-  background: #333333;
+    position: absolute;
+    width: 0.2rem;
+    height: 0.2rem;
+    border-radius: 50%;
+    top: 0.6rem;
+    right: 1.2rem;
+    background: #333333;
 }
 
 .pacman-mouth {
-  background: #000;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(102% 74%, 44% 48%, 100% 21%);
-  animation-name: eat;
-  animation-duration: 0.7s;
-  animation-iteration-count: infinite;
+    background: #000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(102% 74%, 44% 48%, 100% 21%);
+    animation-name: eat;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes eat {
-  0% {
-    clip-path: polygon(102% 74%, 44% 48%, 100% 21%);
-  }
-  25% {
-    clip-path: polygon(102% 60%, 44% 48%, 100% 40%);
-  }
-  50% {
-    clip-path: polygon(102% 50%, 44% 48%, 100% 50%);
-  }
-  75% {
-   clip-path: polygon(102% 59%, 44% 48%, 100% 35%);
-  }
-  100% {
-   clip-path: polygon(102% 74%, 44% 48%, 100% 21%);
-  }
+    0% {
+        clip-path: polygon(102% 74%, 44% 48%, 100% 21%);
+    }
+    25% {
+        clip-path: polygon(102% 60%, 44% 48%, 100% 40%);
+    }
+    50% {
+        clip-path: polygon(102% 50%, 44% 48%, 100% 50%);
+    }
+    75% {
+        clip-path: polygon(102% 59%, 44% 48%, 100% 35%);
+    }
+    100% {
+        clip-path: polygon(102% 74%, 44% 48%, 100% 21%);
+    }
 }
 
 .pacman-food {
-  position: absolute;
-  width: 0.5rem;
-  height: 0.5rem;
-  background: #fafafa;
-  border-radius: 50%;
-  top: 40%;
-  left: 4rem;
-  animation-name: food;
-  animation-duration: 0.7s;
-  animation-iteration-count: infinite;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: #fafafa;
+    border-radius: 50%;
+    top: 40%;
+    left: 4rem;
+    animation-name: food;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes food {
-  0% {
-    transform: translateX(0);
-      opacity: 1;
-  }
-  100% {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
 }
+
 
 /* --------------------------------------- footer */
+
 footer {
-  background-color: #00005f;
-  color: #fafafa;
-  margin: 0 auto;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.7rem;
+    background-color: #00005f;
+    color: #fafafa;
+    margin: 0 auto;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.7rem;
 }
 
-footer{
-  height: 2.5rem;
+footer {
+    height: 2.5rem;
 }
 
 footer p {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-  letter-spacing: 1px;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    letter-spacing: 1px;
 }
 
 footer a {
-  color: #fafafa;
+    color: #fafafa;
 }
 
 footer a:hover {
-  color: gold;
+    color: gold;
 }

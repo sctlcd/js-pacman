@@ -70,7 +70,7 @@ function rotateDiv(pos, deg) {
 
 createBoard();
 
-// Create Pacman template
+// create Pacman template
 class Pacman {
     constructor(className, startIndex, speed) {
         this.className = className;
@@ -82,7 +82,7 @@ class Pacman {
 
 pacman = new Pacman('pac-man', 490, 300);
 
-// Draw pacman onto the grid
+// draw pacman onto the grid
 squares[pacman.currentIndex].classList.add(pacman.className);
 
 // move pac-man
@@ -144,12 +144,13 @@ function movePacman(e) {
     squares[pacman.currentIndex].classList.add('pac-man');
 
     pacDotEaten();
+    powerPelletEaten();
 };
 
 // event listener on keyup event
 document.addEventListener('keyup', movePacman);
 
-// What happens when Pac-man eats a pac-dot
+// function when Pac-man eats a pac-dot
 function pacDotEaten() {
     if (squares[pacman.currentIndex].classList.contains('pac-dot')) {
         score++;
@@ -158,7 +159,22 @@ function pacDotEaten() {
     }
 };
 
-// Create Ghost template
+// function when Pac-man eats a power-pellet
+function powerPelletEaten() {
+    if (squares[pacman.currentIndex].classList.contains('power-pellet')) {
+        score += 10
+        ghosts.forEach(ghost => ghost.isScared = true)
+        setTimeout(unScareGhosts, 10000)
+        squares[pacman.currentIndex].classList.remove('power-pellet')
+    }
+};
+
+// function when the ghosts stop flashing
+function unScareGhosts() {
+    ghosts.forEach(ghost => ghost.isScared = false)
+};
+
+// create Ghost template
 class Ghost {
     constructor(className, startIndex, speed) {
         this.className = className;
@@ -166,6 +182,7 @@ class Ghost {
         this.speed = speed;
         this.currentIndex = startIndex;
         this.timerId = NaN;
+        this.isScared = false;
     };
 };
 
@@ -176,13 +193,13 @@ ghosts = [
     new Ghost('clyde', 379, 500)
 ]
 
-// Draw my ghost onto the grid
+// draw my ghost onto the grid
 ghosts.forEach(ghost => {
     squares[ghost.currentIndex].classList.add(ghost.className);
     squares[ghost.currentIndex].classList.add('ghost');
 });
 
-//move the Ghosts randomly
+// move the Ghosts randomly
 ghosts.forEach(ghost => moveGhost(ghost))
 
 // function to move the ghosts
@@ -195,13 +212,19 @@ function moveGhost(ghost) {
         if (!squares[ghost.currentIndex + direction].classList.contains('ghost') &&
             !squares[ghost.currentIndex + direction].classList.contains('wall')) {
             //remove the ghosts classes
-            squares[ghost.currentIndex].classList.remove(ghost.className)
-            squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
+            squares[ghost.currentIndex].classList.remove(ghost.className, 'ghost', 'scared-ghost')
+                // squares[ghost.currentIndex].classList.remove('ghost', 'scared-ghost')
                 //move into that space
             ghost.currentIndex += direction
             squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
                 //else find a new random direction ot go in
         } else direction = directions[Math.floor(Math.random() * directions.length)]
+
+        //if the ghost is scared
+        if (ghost.isScared) {
+            squares[ghost.currentIndex].classList.add('scared-ghost')
+        }
+
     }, ghost.speed)
 
-}
+};
