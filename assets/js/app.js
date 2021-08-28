@@ -90,12 +90,12 @@ function movePacman(e) {
     squares[pacman.currentIndex].classList.remove('pac-man');
 
     /*
-     key | code | movement | rotation(degree)
-     left arrow | 37 | -1 | 180
-     up arrow | 38 | -width | 270
-     right arrow | 39 | +1 | 0
-     down arrow | 40 | +width | 90
-     */
+      key | code | movement | rotation(degree)
+      left arrow | 37 | -1 | 180
+      up arrow | 38 | -width | 270
+      right arrow | 39 | +1 | 0
+      down arrow | 40 | +width | 90
+      */
     switch (e.keyCode) {
         case 37:
             if (pacman.currentIndex % width !== 0 &&
@@ -145,6 +145,7 @@ function movePacman(e) {
 
     pacDotEaten();
     powerPelletEaten();
+    checkForGameOver();
 };
 
 // event listener on keyup event
@@ -233,6 +234,17 @@ function moveGhost(ghost) {
             squares[ghost.currentIndex].classList.add(ghost.className, 'ghost')
         }
 
-    }, ghost.speed)
+        checkForGameOver();
 
+    }, ghost.speed)
+};
+
+// function to check for game over
+function checkForGameOver() {
+    if (squares[pacman.currentIndex].classList.contains('ghost') &&
+        !squares[pacman.currentIndex].classList.contains('scared-ghost')) {
+        ghosts.forEach(ghost => clearInterval(ghost.timerId))
+        document.removeEventListener('keyup', movePacman)
+        scoreDisplay.innerHTML = 'Game over!'
+    }
 };
