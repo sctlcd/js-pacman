@@ -257,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (score >= 274) {
             ghosts.forEach(ghost => clearInterval(ghost.timerId))
             document.removeEventListener('keyup', movePacman)
-                // setTimeout(function() { alert("WON!"); }, 500)
             scoreDisplay.innerHTML = ' WON!'
         }
     };
