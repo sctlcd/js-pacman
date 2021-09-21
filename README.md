@@ -1,12 +1,12 @@
-# [JS - Pac Man](https://sctlcd.github.io/js-pacman/)
+# [JS - Pac Man](https://sctlcd.github.io/js-pacman-in-progress/)
 
 # Table of Contents <a name="tableOfContents"></a>
 
 1. [About](#about)
 
 2. [Deployment](#deployment)
-    - [Deployment – Run locally](#deploymentRunLocally)
-    - [Deployment – Live website](#deploymentLiveWebsite)
+    - [Deployment - Run locally](#deploymentRunLocally)
+    - [Deployment - Live website](#deploymentLiveWebsite)
 
 3. [Credits](#credits) 
 
@@ -49,9 +49,9 @@ Back to [top](#TableOfContents)
 
 ## Credits <a name="credits"></a>
 
-- Pac-Man… in CSS! [css-tricks](https://css-tricks.com/pac-man-in-css/)
-- Pac-Man [codepen](https://codepen.io/pandamo-Code/embed/RwwBXvj?default-tab=&theme-id=)
-- CSS2 Animated Pacman [codepen](https://codepen.io/wifi/pen/olKxE)
+- Pac-Man… in CSS! - [css-tricks](https://css-tricks.com/pac-man-in-css/)
+- Pac-Man - [codepen](https://codepen.io/pandamo-Code/embed/RwwBXvj?default-tab=&theme-id=)
+- CSS2 Animated Pacman - [codepen](https://codepen.io/wifi/pen/olKxE)
 
 Back to [top](#TableOfContents)
 
